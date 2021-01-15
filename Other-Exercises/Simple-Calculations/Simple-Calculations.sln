@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Square-Area", "Square-Area\Square-Area.csproj", "{5BFE5FC8-8BE3-42CF-92DB-69311D131FB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InchesToCentimeters", "InchesToCentimeters\InchesToCentimeters.csproj", "{E38AC3D8-D136-4DA3-84C8-F2B44259486B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rectangle", "Rectangle\Rectangle.csproj", "{696A786E-AC2B-4260-A1F1-56A5E5574358}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Celsius-To-Fahrenheit", "Celsius-To-Fahrenheit\Celsius-To-Fahrenheit.csproj", "{4F2D01AB-FA17-4C1D-8CED-CAF4614DEEA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rad-To-Deg", "Rad-To-Deg\Rad-To-Deg.csproj", "{C011C960-F345-43F0-A0BE-50783855B5BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currency-Calc", "Currency-Calc\Currency-Calc.csproj", "{B38CD35F-4D46-4F91-A826-0B68D615D809}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DateTime", "DateTime\DateTime.csproj", "{57E77FF0-589F-4F43-ABC9-61305C5A11AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5BFE5FC8-8BE3-42CF-92DB-69311D131FB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BFE5FC8-8BE3-42CF-92DB-69311D131FB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BFE5FC8-8BE3-42CF-92DB-69311D131FB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BFE5FC8-8BE3-42CF-92DB-69311D131FB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E38AC3D8-D136-4DA3-84C8-F2B44259486B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E38AC3D8-D136-4DA3-84C8-F2B44259486B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E38AC3D8-D136-4DA3-84C8-F2B44259486B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E38AC3D8-D136-4DA3-84C8-F2B44259486B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{696A786E-AC2B-4260-A1F1-56A5E5574358}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{696A786E-AC2B-4260-A1F1-56A5E5574358}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{696A786E-AC2B-4260-A1F1-56A5E5574358}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{696A786E-AC2B-4260-A1F1-56A5E5574358}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F2D01AB-FA17-4C1D-8CED-CAF4614DEEA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F2D01AB-FA17-4C1D-8CED-CAF4614DEEA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F2D01AB-FA17-4C1D-8CED-CAF4614DEEA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F2D01AB-FA17-4C1D-8CED-CAF4614DEEA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C011C960-F345-43F0-A0BE-50783855B5BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C011C960-F345-43F0-A0BE-50783855B5BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C011C960-F345-43F0-A0BE-50783855B5BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C011C960-F345-43F0-A0BE-50783855B5BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B38CD35F-4D46-4F91-A826-0B68D615D809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B38CD35F-4D46-4F91-A826-0B68D615D809}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B38CD35F-4D46-4F91-A826-0B68D615D809}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B38CD35F-4D46-4F91-A826-0B68D615D809}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57E77FF0-589F-4F43-ABC9-61305C5A11AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57E77FF0-589F-4F43-ABC9-61305C5A11AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57E77FF0-589F-4F43-ABC9-61305C5A11AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57E77FF0-589F-4F43-ABC9-61305C5A11AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4523B486-8BFA-46EC-AF6B-FBD2C06710B3}
+	EndGlobalSection
+EndGlobal
