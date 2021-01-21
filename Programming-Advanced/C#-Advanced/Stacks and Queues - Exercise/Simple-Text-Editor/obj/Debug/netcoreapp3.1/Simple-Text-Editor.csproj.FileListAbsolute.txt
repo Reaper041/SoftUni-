@@ -1,0 +1,13 @@
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Simple-Text-Editor\bin\Debug\netcoreapp3.1\Simple-Text-Editor.exe
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Simple-Text-Editor\bin\Debug\netcoreapp3.1\Simple-Text-Editor.deps.json
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Simple-Text-Editor\bin\Debug\netcoreapp3.1\Simple-Text-Editor.runtimeconfig.json
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Simple-Text-Editor\bin\Debug\netcoreapp3.1\Simple-Text-Editor.runtimeconfig.dev.json
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Simple-Text-Editor\bin\Debug\netcoreapp3.1\Simple-Text-Editor.dll
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Simple-Text-Editor\bin\Debug\netcoreapp3.1\Simple-Text-Editor.pdb
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Simple-Text-Editor\obj\Debug\netcoreapp3.1\Simple-Text-Editor.csprojAssemblyReference.cache
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Simple-Text-Editor\obj\Debug\netcoreapp3.1\Simple-Text-Editor.AssemblyInfoInputs.cache
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Simple-Text-Editor\obj\Debug\netcoreapp3.1\Simple-Text-Editor.AssemblyInfo.cs
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Simple-Text-Editor\obj\Debug\netcoreapp3.1\Simple-Text-Editor.csproj.CoreCompileInputs.cache
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Simple-Text-Editor\obj\Debug\netcoreapp3.1\Simple-Text-Editor.dll
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Simple-Text-Editor\obj\Debug\netcoreapp3.1\Simple-Text-Editor.pdb
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Simple-Text-Editor\obj\Debug\netcoreapp3.1\Simple-Text-Editor.genruntimeconfig.cache

@@ -5,17 +5,21 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basic-Stack-Operations", "Basic-Stack-Operations\Basic-Stack-Operations.csproj", "{C09474CC-D40F-4CA3-A798-7FB71B5AB29D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basic-Queue-Operations", "Basic-Queue-Operations\Basic-Queue-Operations.csproj", "{981B705A-2730-4F5D-BEF4-075DB0A8A8CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basic-Queue-Operations", "Basic-Queue-Operations\Basic-Queue-Operations.csproj", "{981B705A-2730-4F5D-BEF4-075DB0A8A8CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maximum-and-Minimum-Element", "Maximum-and-Minimum-Element\Maximum-and-Minimum-Element.csproj", "{816DBF90-A18C-4D63-A5EC-BA40F2B529BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maximum-and-Minimum-Element", "Maximum-and-Minimum-Element\Maximum-and-Minimum-Element.csproj", "{816DBF90-A18C-4D63-A5EC-BA40F2B529BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fast-Food", "Fast-Food\Fast-Food.csproj", "{DEC5B776-F71A-4DD9-A74A-BC13372ACE1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast-Food", "Fast-Food\Fast-Food.csproj", "{DEC5B776-F71A-4DD9-A74A-BC13372ACE1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fashion-Boutique", "Fashion-Boutique\Fashion-Boutique.csproj", "{B939C282-28D7-4299-9466-FE4110D52F92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fashion-Boutique", "Fashion-Boutique\Fashion-Boutique.csproj", "{B939C282-28D7-4299-9466-FE4110D52F92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Songs-Queue", "Songs-Queue\Songs-Queue.csproj", "{1506535E-1379-4FA4-A4F1-6540E03984B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Songs-Queue", "Songs-Queue\Songs-Queue.csproj", "{1506535E-1379-4FA4-A4F1-6540E03984B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Truck-Tour", "Truck-Tour\Truck-Tour.csproj", "{45825F42-1378-43F7-8038-8171CD708D68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Truck-Tour", "Truck-Tour\Truck-Tour.csproj", "{45825F42-1378-43F7-8038-8171CD708D68}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Balanced-Parenthesis", "Balanced-Parenthesis\Balanced-Parenthesis.csproj", "{DEF18022-79BF-41D1-AC6B-163E3106F62B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple-Text-Editor", "Simple-Text-Editor\Simple-Text-Editor.csproj", "{EDA5495F-0789-4714-80C0-FE1EE25B5E87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,14 @@ Global
 		{45825F42-1378-43F7-8038-8171CD708D68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45825F42-1378-43F7-8038-8171CD708D68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45825F42-1378-43F7-8038-8171CD708D68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEF18022-79BF-41D1-AC6B-163E3106F62B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEF18022-79BF-41D1-AC6B-163E3106F62B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEF18022-79BF-41D1-AC6B-163E3106F62B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEF18022-79BF-41D1-AC6B-163E3106F62B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDA5495F-0789-4714-80C0-FE1EE25B5E87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDA5495F-0789-4714-80C0-FE1EE25B5E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDA5495F-0789-4714-80C0-FE1EE25B5E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDA5495F-0789-4714-80C0-FE1EE25B5E87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

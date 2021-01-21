@@ -34,7 +34,7 @@ namespace Basic_Queue_Operations
             {
                 if (numbers.Contains(x))
                 {
-                    Console.WriteLine("True"); 
+                    Console.WriteLine("true"); 
                 }
                 else
                 {

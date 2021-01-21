@@ -1,0 +1,12 @@
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Balanced-Parenthesis\bin\Debug\netcoreapp3.1\Balanced-Parenthesis.exe
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Balanced-Parenthesis\bin\Debug\netcoreapp3.1\Balanced-Parenthesis.deps.json
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Balanced-Parenthesis\bin\Debug\netcoreapp3.1\Balanced-Parenthesis.runtimeconfig.json
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Balanced-Parenthesis\bin\Debug\netcoreapp3.1\Balanced-Parenthesis.runtimeconfig.dev.json
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Balanced-Parenthesis\bin\Debug\netcoreapp3.1\Balanced-Parenthesis.dll
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Balanced-Parenthesis\bin\Debug\netcoreapp3.1\Balanced-Parenthesis.pdb
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Balanced-Parenthesis\obj\Debug\netcoreapp3.1\Balanced-Parenthesis.AssemblyInfoInputs.cache
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Balanced-Parenthesis\obj\Debug\netcoreapp3.1\Balanced-Parenthesis.AssemblyInfo.cs
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Balanced-Parenthesis\obj\Debug\netcoreapp3.1\Balanced-Parenthesis.csproj.CoreCompileInputs.cache
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Balanced-Parenthesis\obj\Debug\netcoreapp3.1\Balanced-Parenthesis.dll
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Balanced-Parenthesis\obj\Debug\netcoreapp3.1\Balanced-Parenthesis.pdb
+D:\VS Projects\Programming-Advanced\C#-Advanced\Stacks and Queues - Exercise\Balanced-Parenthesis\obj\Debug\netcoreapp3.1\Balanced-Parenthesis.genruntimeconfig.cache
