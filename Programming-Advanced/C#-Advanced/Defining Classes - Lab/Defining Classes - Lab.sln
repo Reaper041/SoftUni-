@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Car", "Car\Car.csproj", "{D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Car-Extension", "Car-Extension\Car-Extension.csproj", "{808A6D9D-D2CF-4B89-9FE0-66929C39B621}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Car-Constructors", "Car-Constructors\Car-Constructors.csproj", "{8D70DE28-D475-4B60-9FCA-4DD4B35EFE1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Car-Constructors", "Car-Constructors\Car-Constructors.csproj", "{8D70DE28-D475-4B60-9FCA-4DD4B35EFE1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Car-Engine-And-Tires", "Car-Engine-And-Tires\Car-Engine-And-Tires.csproj", "{57EF40D5-8FA1-426F-AB0E-FE25AA626803}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Car-Engine-And-Tires", "Car-Engine-And-Tires\Car-Engine-And-Tires.csproj", "{57EF40D5-8FA1-426F-AB0E-FE25AA626803}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Special-Cars", "Special-Cars\Special-Cars.csproj", "{B5B9E27D-2617-44D4-AD58-B5A0D1CF073C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{57EF40D5-8FA1-426F-AB0E-FE25AA626803}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57EF40D5-8FA1-426F-AB0E-FE25AA626803}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57EF40D5-8FA1-426F-AB0E-FE25AA626803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5B9E27D-2617-44D4-AD58-B5A0D1CF073C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5B9E27D-2617-44D4-AD58-B5A0D1CF073C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5B9E27D-2617-44D4-AD58-B5A0D1CF073C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5B9E27D-2617-44D4-AD58-B5A0D1CF073C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
