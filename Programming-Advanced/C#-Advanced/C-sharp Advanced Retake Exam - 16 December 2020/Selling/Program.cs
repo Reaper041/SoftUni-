@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 
 namespace Selling
 {
@@ -45,160 +46,68 @@ namespace Selling
                 }
             }
 
-            bool flag = false;
+
             while (sum < 50)
             {
                 string command = Console.ReadLine();
 
-                switch (command)
+                bakery[myRow, myCol] = '-';
+
+                if (command == "up")
                 {
-                    case "up":
-                        if (myRow - 1 < 0)
-                        {
-                            flag = true;
-                            bakery[myRow, myCol] = '-';
-                            break;
-                        }
-                        else if (char.IsNumber(bakery[myRow - 1, myCol]))
-                        {
-                            sum += int.Parse(bakery[myRow - 1, myCol].ToString());
-                            bakery[myRow - 1, myCol] = 'S';
-                            bakery[myRow, myCol] = '-';
-                            myRow -= 1;
-                        }
-                        else if (bakery[myRow - 1, myCol] == 'O')
-                        {
-                            bakery[myRow - 1, myCol] = '-';
-                            if (myRow - 1 != firstORow && myCol != firstOCol)
-                            {
-                                myRow = firstORow;
-                                myCol = firstOCol;
-                            }
-                            else
-                            {
-                                myRow = secondORow;
-                                myCol = secondOCol;
-                            }
-
-                            bakery[myRow, myCol] = 'S';
-                        }
-                        else
-                        {
-                            bakery[myRow - 1, myCol] = 'S';
-                            myRow -= 1;
-                        }
-                        break;
-                    case "down":
-                        if (myRow + 1 > n)
-                        {
-                            flag = true;
-                            break;
-                        }
-                        else if (char.IsNumber(bakery[myRow + 1, myCol]))
-                        {
-                            sum += int.Parse(bakery[myRow + 1, myCol].ToString());
-                            bakery[myRow + 1, myCol] = 'S';
-                            bakery[myRow, myCol] = '-';
-                            myRow += 1;
-                        }
-                        else if (bakery[myRow + 1, myCol] == 'O')
-                        {
-                            bakery[myRow + 1, myCol] = '-';
-                            if (myRow + 1 != firstORow && myCol != firstOCol)
-                            {
-                                myRow = firstORow;
-                                myCol = firstOCol;
-                            }
-                            else
-                            {
-                                myRow = secondORow;
-                                myCol = secondOCol;
-                            }
-
-                            bakery[myRow, myCol] = 'S';
-                        }
-                        else
-                        {
-                            bakery[myRow + 1, myCol] = 'S';
-                            myRow += 1;
-                        }
-                        break;
-                    case "left":
-                        if (myCol - 1 < 0)
-                        {
-                            flag = true;
-                            break;
-                        }
-                        else if (char.IsNumber(bakery[myRow, myCol - 1]))
-                        {
-                            sum += int.Parse(bakery[myRow, myCol - 1].ToString());
-                            bakery[myRow, myCol - 1] = 'S';
-                            bakery[myRow, myCol] = '-';
-                            myCol -= 1;
-                        }
-                        else if (bakery[myRow, myCol - 1] == 'O')
-                        {
-                            bakery[myRow, myCol - 1] = '-';
-                            if (myRow != firstORow && myCol - 1 != firstOCol)
-                            {
-                                myRow = firstORow;
-                                myCol = firstOCol;
-                            }
-                            else
-                            {
-                                myRow = secondORow;
-                                myCol = secondOCol;
-                            }
-
-                            bakery[myRow, myCol] = 'S';
-                        }
-                        else
-                        {
-                            bakery[myRow, myCol - 1] = 'S';
-                            myCol -= 1;
-                        }
-                        break;
-                    case "right":
-                        if (myCol + 1 > n)
-                        {
-                            flag = true;
-                            break;
-                        }
-                        else if (char.IsNumber(bakery[myRow, myCol + 1]))
-                        {
-                            sum += int.Parse(bakery[myRow, myCol + 1].ToString());
-                            bakery[myRow, myCol + 1] = 'S';
-                            bakery[myRow, myCol] = '-';
-                            myCol += 1;
-                        }
-                        else if (bakery[myRow, myCol + 1] == 'O')
-                        {
-                            bakery[myRow, myCol + 1] = '-';
-                            if (myRow != firstORow && myCol + 1 != firstOCol)
-                            {
-                                myRow = firstORow;
-                                myCol = firstOCol;
-                            }
-                            else
-                            {
-                                myRow = secondORow;
-                                myCol = secondOCol;
-                            }
-
-                            bakery[myRow, myCol] = 'S';
-                        }
-                        else
-                        {
-                            bakery[myRow, myCol + 1] = 'S';
-                            myCol += 1;
-                        }
-                        break;
+                    myRow -= 1;
                 }
+                else if (command == "down")
+                {
+                    myRow += 1;
+                }
+                else if (command == "left")
+                {
+                    myCol -= 1;
+                }
+                else
+                {
+                    myCol += 1;
+                }
+
+                if (!IsIndexValid(myRow, myCol, n, n))
+                {
+                    Console.WriteLine($"Bad news, you are out of the bakery.");
+                    break;
+                }
+
+
+                if (bakery[myRow, myCol] == 'O')
+                {
+                    if (myRow == firstORow && myCol == firstOCol)
+                    {
+                        myRow = secondORow;
+                        myCol = secondOCol;
+                    }
+                    else
+                    {
+                        myRow = secondORow;
+                        myCol = secondOCol;
+                    }
+
+                    bakery[firstORow, firstOCol] = '-';
+                    bakery[secondORow, secondOCol] = '-';
+                }
+
+                if (char.IsNumber(bakery[myRow, myCol]))
+                {
+                    sum += int.Parse(bakery[myRow, myCol].ToString());
+                }
+
+                bakery[myRow, myCol] = 'S';
             }
 
+            if (sum >= 50)
+            {
+                Console.WriteLine("Good news! You succeeded in collecting enough money!");
+            }
 
-
-
+            Console.WriteLine($"Money: {sum}");
 
             for (int row = 0; row < n; row++)
             {
@@ -209,6 +118,16 @@ namespace Selling
 
                 Console.WriteLine();
             }
+        }
+
+        public static bool IsIndexValid(int row, int col, int rows, int cols)
+        {
+            if (row < 0 || row >= rows || col < 0 || col >= cols) 
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
