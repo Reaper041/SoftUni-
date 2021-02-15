@@ -59,7 +59,7 @@ namespace ClassroomProject
                     sb.AppendLine($"{student.FirstName} {student.LastName}");
                 }
 
-                return sb.ToString();
+                return sb.ToString().TrimEnd();
             }
 
             return "No students enrolled for the subject";
