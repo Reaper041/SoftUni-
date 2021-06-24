@@ -1,3 +1,6 @@
 function showText() {
-    // TODO
+    let showMoreElement = document.querySelector('#text');
+
+    showMoreElement.style.display = 'inline';
+    document.getElementById('more').style.display = 'none';
 }
