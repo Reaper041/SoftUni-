@@ -11,6 +11,13 @@ function loadCommits() {
             listItemElement.textContent = `${commit.commit.author.name}: ${commit.commit.message}`
 
             commitsListElement.appendChild(listItemElement)
-        }));
+        }))
+        .catch(error => {
+            let listItemElement = document.createElement('li');
+
+            listItemElement.textContent = `${error}`
+            
+            commitsListElement.appendChild(listItemElement)
+        });
 
 }   
