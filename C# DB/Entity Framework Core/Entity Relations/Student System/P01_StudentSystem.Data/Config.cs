@@ -2,6 +2,6 @@
 {
     public static class Config
     {
-        public const string ConnectionString = @"Server=DESKTOP-5P50UCA;Database=StudentSystem";
+        public const string ConnectionString = @"Server=DESKTOP-5P50UCA;Database=StudentSystem;Trusted_Connection=True;";
     }
 }
