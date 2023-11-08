@@ -2,7 +2,7 @@
 
 namespace P01_StudentSystem.Data.Migrations
 {
-    public partial class InitialStartUp : Migration
+    public partial class New : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

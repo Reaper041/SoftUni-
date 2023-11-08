@@ -4,7 +4,6 @@ namespace P01_StudentSystem.Data.Models
 {
     public class StudentCourse
     {
-        // TODO: Relations
 
         [ForeignKey(nameof(Student))]
         public int StudentId { get; set; }

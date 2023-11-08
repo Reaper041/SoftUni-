@@ -9,8 +9,8 @@ using P01_StudentSystem.Data;
 namespace P01_StudentSystem.Data.Migrations
 {
     [DbContext(typeof(StudentSystemContext))]
-    [Migration("20231108124254_InitialStartUp")]
-    partial class InitialStartUp
+    [Migration("20231108130039_New")]
+    partial class New
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
