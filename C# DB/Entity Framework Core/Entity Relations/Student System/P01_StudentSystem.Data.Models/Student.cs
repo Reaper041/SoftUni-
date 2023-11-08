@@ -9,7 +9,7 @@ namespace P01_StudentSystem.Data.Models
     {
         public Student()
         {
-            this.CourseEnrollments = new HashSet<Course>();
+            this.CourseEnrollments = new HashSet<StudentCourse>();
             this.HomeworkSubmissions = new HashSet<Homework>();
         }
 
@@ -28,7 +28,7 @@ namespace P01_StudentSystem.Data.Models
         [Required]
         public DateTime Birthday { get; set; }
 
-        public virtual ICollection<Course> CourseEnrollments { get; set; }
+        public virtual ICollection<StudentCourse> CourseEnrollments { get; set; }
 
         public virtual ICollection<Homework> HomeworkSubmissions { get; set; }
     }

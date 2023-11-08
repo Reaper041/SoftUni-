@@ -8,7 +8,7 @@ namespace P01_StudentSystem.Data.Models
     {
         public Course()
         {
-            this.StudentsEnrolled = new HashSet<Student>();
+            this.StudentsEnrolled = new HashSet<StudentCourse>();
             this.Resources = new HashSet<Resource>();
             this.HomeworkSubmissions = new HashSet<Homework>();
         }
@@ -28,7 +28,7 @@ namespace P01_StudentSystem.Data.Models
 
         public decimal Price { get; set; }
 
-        public virtual ICollection<Student> StudentsEnrolled { get; set; }
+        public virtual ICollection<StudentCourse> StudentsEnrolled { get; set; }
 
         public virtual ICollection<Resource> Resources { get; set; }
 

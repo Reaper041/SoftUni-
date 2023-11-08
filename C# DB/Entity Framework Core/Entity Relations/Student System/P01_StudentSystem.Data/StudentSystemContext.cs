@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using P01_StudentSystem.Data.Models;
 
 namespace P01_StudentSystem.Data
@@ -19,15 +17,15 @@ namespace P01_StudentSystem.Data
         }
 
 
-        public HashSet<Course> Courses { get; set; }
+        public DbSet<Course> Courses { get; set; }
 
-        public HashSet<Homework> Homeworks { get; set; }
+        public DbSet<Homework> Homeworks { get; set; }
 
-        public HashSet<Resource> Resources { get; set; }
+        public DbSet<Resource> Resources { get; set; }
 
-        public HashSet<Student> Students { get; set; }
+        public DbSet<Student> Students { get; set; }
 
-        public HashSet<StudentCourse> StudentCourses { get; set; }
+        public DbSet<StudentCourse> StudentCourses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -41,7 +39,9 @@ namespace P01_StudentSystem.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder
+                .Entity<StudentCourse>(e => e.HasKey(sc => new
+            { sc.CourseId, sc.StudentId }));
         }
 
     }

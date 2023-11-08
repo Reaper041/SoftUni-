@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20231108145307_InitialStartUp.cs" />
+    <Compile Remove="Migrations\20231108145307_InitialStartUp.Designer.cs" />
+    <Compile Remove="Migrations\20231108152050_InitialStartUp.cs" />
+    <Compile Remove="Migrations\20231108152050_InitialStartUp.Designer.cs" />
+    <Compile Remove="Migrations\20231108152400_InitialStartUp.cs" />
+    <Compile Remove="Migrations\20231108152400_InitialStartUp.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.30">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -17,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\P01_StudentSystem.Data.Models\P01_StudentSystem.Data.Models.csproj" />
+    <ProjectReference Include="..\P03_FootballBetting.Data.Models\P02_FootballBetting.Data.Models.csproj" />
   </ItemGroup>
 
 </Project>
