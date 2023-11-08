@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using P01_StudentSystem.Data.Models.Enums;
+using ContentType = P01_StudentSystem.Data.Models.Enums.ContentType;
 
 namespace P01_StudentSystem.Data.Models
 {

@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace P01_StudentSystem.Data.Models
 {
@@ -13,7 +12,7 @@ namespace P01_StudentSystem.Data.Models
         public virtual Student Student { get; set; }
 
         [ForeignKey(nameof(Course))]
-        public int CourseId { get; set;}
+        public int CourseId { get; set; }
 
         public virtual Course Course { get; set; }
     }

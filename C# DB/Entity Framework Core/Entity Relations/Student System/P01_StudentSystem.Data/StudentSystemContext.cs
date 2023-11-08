@@ -9,13 +9,13 @@ namespace P01_StudentSystem.Data
     {
         public StudentSystemContext()
         {
-            
+
         }
 
         public StudentSystemContext(DbContextOptions options)
-        : base(options)
+            : base(options)
         {
-            
+
         }
 
 

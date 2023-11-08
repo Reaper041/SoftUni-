@@ -16,7 +16,7 @@ namespace P01_StudentSystem.Data.Models
         [Key]
         public int StudentId { get; set; }
 
-        [Required]      
+        [Required]
         [MaxLength(100)]
         public string Name { get; set; }
 
