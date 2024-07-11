@@ -1,12 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
+﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using ProductShop.Data;
-using ProductShop.DTOs.Export;
-using ProductShop.DTOs.Import;
 using ProductShop.Models;
-using ValidationContext = AutoMapper.ValidationContext;
 
 namespace ProductShop
 {
@@ -14,84 +10,58 @@ namespace ProductShop
     {
         public static void Main()
         {
-            Mapper.Initialize(cfg => cfg.AddProfile(typeof(ProductShopProfile)));
-
             ProductShopContext context = new ProductShopContext();
 
-            string inputJson = File.ReadAllText("../../../Datasets/products.json");
-            string inputJsonUsers = File.ReadAllText("../../../Datasets/users.json");
-            string inputJsonCat = File.ReadAllText("../../../Datasets/categories.json");
-            string inputJsonCatProd = File.ReadAllText("../../../Datasets/categories-products.json");
+            string userText = File.ReadAllText("../../../Datasets/users.json");
+            string productText = File.ReadAllText("../../../Datasets/products.json");
+            string categoriesText = File.ReadAllText("../../../Datasets/categories.json");
+            string categoriesProductsText = File.ReadAllText("../../../Datasets/categories-products.json");
 
+            //Console.WriteLine(ImportUsers(context, userText));
+            //Console.WriteLine(ImportProducts(context, productText));
+            //Console.WriteLine(ImportCategories(context,categoriesText));
+            //Console.WriteLine(ImportCategoryProducts(context, categoriesProductsText));
 
-            //context.Database.EnsureDeleted();
-            //context.Database.EnsureCreated();
-
-            //Console.WriteLine(ImportUsers(context, inputJsonUsers));
-            //Console.WriteLine(ImportProducts(context, inputJson));
-            //Console.WriteLine(ImportCategories(context, inputJsonCat));
-            //Console.WriteLine(ImportCategoryProducts(context, inputJsonCatProd));
-
-            var products = context.Products.ToArray();
-            string json = GetProductsInRange(context);
-
-            File.WriteAllText("../../../Results", json);
+            //Console.WriteLine(GetProductsInRange(context));
+            //Console.WriteLine(GetSoldProducts(context));
+            //Console.WriteLine(GetCategoriesByProductsCount(context));
+            Console.WriteLine(GetUsersWithProducts(context));
         }
 
         public static string ImportUsers(ProductShopContext context, string inputJson)
         {
-            ImportUserDTO[] userDtos = JsonConvert.DeserializeObject<ImportUserDTO[]>(inputJson);
+            var users = JsonConvert.DeserializeObject<List<User>>(inputJson);
 
-            ICollection<User> users = new List<User>();
 
-            foreach (ImportUserDTO userDto in userDtos)
-            {
-                User user = Mapper.Map<User>(userDto);
-                users.Add(user);
-            }
-
-            context.Users.AddRange(users);
+            context.Users.AddRangeAsync(users);
             context.SaveChanges();
+
 
             return $"Successfully imported {users.Count}";
         }
 
         public static string ImportProducts(ProductShopContext context, string inputJson)
         {
-            ImportProductDTO[] productDtos = JsonConvert.DeserializeObject<ImportProductDTO[]>(inputJson);
+            var products = JsonConvert.DeserializeObject<List<Product>>(inputJson);
 
-            ICollection<Product> products = new List<Product>();
-
-            foreach (var productDto in productDtos)
-            {
-                Product product = Mapper.Map<Product>(productDto);
-                products.Add(product);
-            }
-
-            context.Products.AddRange(products);
+            context.Products.AddRangeAsync(products);
             context.SaveChanges();
 
             return $"Successfully imported {products.Count}";
+
         }
 
         public static string ImportCategories(ProductShopContext context, string inputJson)
         {
-            ImportCategoryDTO[] categoriesDtos = JsonConvert.DeserializeObject<ImportCategoryDTO[]>(inputJson);
-
-            ICollection<Category> categories = new List<Category>();
-
-            foreach (var importCategoryDto in categoriesDtos)
+            JsonSerializerSettings settings = new JsonSerializerSettings()
             {
-                if (!IsValid(importCategoryDto))
-                {
-                    continue;
-                }
+                NullValueHandling = NullValueHandling.Ignore,
+            };
 
-                Category category = Mapper.Map<Category>(importCategoryDto);
-                categories.Add(category);
-            }
+            var categories = JsonConvert.DeserializeObject<List<Category>>(inputJson, settings);
 
-            context.Categories.AddRange(categories);
+            categories.RemoveAll(c => c.Name == null);
+            context.Categories.AddRangeAsync(categories);
             context.SaveChanges();
 
             return $"Successfully imported {categories.Count}";
@@ -99,46 +69,135 @@ namespace ProductShop
 
         public static string ImportCategoryProducts(ProductShopContext context, string inputJson)
         {
-            ImportCategoryProductDTO[] categoryProductDtos =
-                JsonConvert.DeserializeObject<ImportCategoryProductDTO[]>(inputJson);
+            var categoriesProducts = JsonConvert.DeserializeObject<List<CategoryProduct>>(inputJson);
 
-            ICollection<CategoryProduct> categories = new List<CategoryProduct>();
-
-            foreach (var importCategoryProductDto in categoryProductDtos)
-            {
-                CategoryProduct categoryProduct = Mapper.Map<CategoryProduct>(importCategoryProductDto);
-
-                categories.Add(categoryProduct);
-            }
-
-            context.CategoriesProducts.AddRange(categories);
+            context.CategoriesProducts.AddRangeAsync(categoriesProducts);
             context.SaveChanges();
 
-            return $"Successfully imported {categories.Count}";
-
+            return $"Successfully imported {categoriesProducts.Count}";
         }
 
         public static string GetProductsInRange(ProductShopContext context)
         {
-            ExportProductsInRangeDTO[] products = context
+            var products = context
                 .Products
                 .Where(p => p.Price >= 500 && p.Price <= 1000)
                 .OrderBy(p => p.Price)
-                .ProjectTo<ExportProductsInRangeDTO>()
-                .ToArray();
+                .Select(p => new {
+                    FullName = $"{p.Seller.FirstName} {p.Seller.LastName}",
+                    p.Name,
+                    p.Price
+                })
+                .ToList();
 
-            string json = JsonConvert.SerializeObject(products, Formatting.Indented);
+            return JsonConvert.SerializeObject(products, Formatting.Indented);
 
-            return json;
         }
 
-        private static bool IsValid(object obj)
+        public static string GetSoldProducts(ProductShopContext context)
         {
-            var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(obj);
-            var validationResult = new List<ValidationResult>();
+            var users = context
+                .Users
+                .Where(u => u.ProductsBought.Count >= 1)
+                .OrderBy(u => u.LastName)
+                .ThenBy(u => u.FirstName)
+                .Select(u => new
+                {
+                    u.FirstName,
+                    u.LastName,
+                    SoldProducts = u.ProductsSold
+                    .Select(p => new
+                    {
+                        p.Name,
+                        p.Price,    
+                        BuyerFirstName = p.Buyer.FirstName,
+                        BuyerLastName = p.Buyer.LastName
+                    })
+                })
+                .ToList();
 
-            bool isValid = Validator.TryValidateObject(obj, validationContext, validationResult);
-            return isValid;
+            var options = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                //NullValueHandling = NullValueHandling.Ignore,
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
+                
+               return JsonConvert.SerializeObject (users, options);
+        }
+
+        public static string GetCategoriesByProductsCount(ProductShopContext context)
+        {
+            var categories = context
+                .Categories
+                .Include(c => c.CategoriesProducts)
+                .ThenInclude(cp => cp.Product)
+                .OrderBy(c => c.CategoriesProducts.Count)
+                .Select(c => new
+                {
+                    Name = c.Name,
+                    ProductsCount = c.CategoriesProducts.Count,
+                    AveragePrice = c.CategoriesProducts.Average(cp => cp.Product.Price).ToString("f2"),
+                    TotalRevenue = c.CategoriesProducts.Sum(cp => cp.Product.Price).ToString("f2")
+                })
+                .OrderByDescending(x => x.ProductsCount)
+                .ToList();
+
+            var options = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                //NullValueHandling = NullValueHandling.Ignore,
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
+
+            return JsonConvert.SerializeObject(categories, options);
+        }
+
+        public static string GetUsersWithProducts(ProductShopContext context)
+        {
+            var users = context
+                .Users
+                .Where(u => u.ProductsSold.Any(p => p.BuyerId != null && p.Price != null))
+                .OrderByDescending(u => u.ProductsSold.Count)
+                .Select(u => new
+                {
+                    u.FirstName,
+                    u.LastName,
+                    u.Age,
+                    SoldProducts = u.ProductsSold
+                    .Where(p => p.BuyerId != null)
+                    .Select(p => new
+                    {
+                        p.Name,
+                        p.Price
+                    })
+                    .ToArray()
+                })
+                .ToList();
+
+            var options = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore,
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
+
+            var output = new
+            {
+                UsersCount = users.Count,
+                Users = users.Select(u => new
+                {
+                    LastName = u.LastName,
+                    Age = u.Age,
+                    SoldProducts = new
+                    {
+                        Count = u.SoldProducts.Length,
+                        Products = u.SoldProducts
+                    }
+                })
+            };
+
+            return JsonConvert.SerializeObject(output, options);
         }
     }
 }
