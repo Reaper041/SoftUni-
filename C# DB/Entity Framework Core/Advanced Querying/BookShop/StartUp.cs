@@ -17,9 +17,9 @@ namespace BookShop
 
             Console.WriteLine(GetGoldenBooks(db));
 
-            string asd = "13.43m";
+            //string asd = "13.43m";
 
-            decimal ass = decimal.Parse(asd);
+            //decimal ass = decimal.Parse(asd);
         }
 
         public static string GetBooksByAgeRestriction(BookShopContext context, string command)
