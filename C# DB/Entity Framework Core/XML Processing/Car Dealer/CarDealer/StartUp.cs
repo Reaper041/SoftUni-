@@ -35,7 +35,9 @@ namespace CarDealer
 
             //Console.WriteLine(GetCarsWithTheirListOfParts(context));
 
-            Console.WriteLine(GetTotalSalesByCustomer(context));
+            //Console.WriteLine(GetTotalSalesByCustomer(context));
+
+            Console.WriteLine(GetSalesWithAppliedDiscount(context));
         }
 
         public static string ImportSuppliers(CarDealerContext context, string inputXml)
@@ -360,5 +362,40 @@ namespace CarDealer
                 return textWriter.ToString();
             }
         }
+
+        public static string GetSalesWithAppliedDiscount(CarDealerContext context)
+        {
+            var sales = context.Sales
+                .Select(s => new SaleExportDto()
+                {
+                    Car = new CarInSaleExportDto()
+                    {
+                        Make = s.Car.Make,
+                        Model = s.Car.Model,
+                        TraveledDistance = s.Car.TraveledDistance
+                    },
+                    Discount = (int)s.Discount,
+                    CustomerName = s.Customer.Name,
+                    Price = s.Car.PartsCars
+                        .Sum(pc => pc.Part.Price),
+                    PriceWithDiscount = Math.Round(
+                        (double)(s.Car.PartsCars.Sum(p => p.Part.Price)
+                                 * (1 - (s.Discount / 100))), 4)
+                }).ToArray();
+
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(SaleExportDto[]),
+                new XmlRootAttribute("sales"));
+
+            using (StringWriter textWriter = new StringWriter())
+            {
+                XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                ns.Add("", "");
+
+                xmlSerializer.Serialize(textWriter, sales, ns);
+                return textWriter.ToString();
+            }
+        }
     }
+
+   
 }
