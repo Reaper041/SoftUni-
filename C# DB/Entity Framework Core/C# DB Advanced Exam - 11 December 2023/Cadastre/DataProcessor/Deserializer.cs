@@ -5,6 +5,7 @@
     using Cadastre.Data.Models;
     using Cadastre.DataProcessor.ImportDtos;
     using Cadastre.Utilities;
+    using Newtonsoft.Json;
     using System.ComponentModel.DataAnnotations;
     using System.Globalization;
     using System.Text;
@@ -96,7 +97,58 @@
 
         public static string ImportCitizens(CadastreContext dbContext, string jsonDocument)
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+
+            CitizenImportDto[] dtos = JsonConvert.DeserializeObject<CitizenImportDto[]> (jsonDocument)!;
+            List<Citizen> validCitizens = new List<Citizen>();
+
+            foreach (CitizenImportDto dto in dtos)
+            {
+                if (!IsValid(dto))
+                {
+                    sb.AppendLine(ErrorMessage); 
+                    continue;
+                }
+
+                if (dto.MaritalStatus != "Unmarried" && 
+                    dto.MaritalStatus != "Married" && 
+                    dto.MaritalStatus != "Divorced" && 
+                    dto.MaritalStatus != "Widowed")
+                {
+                    sb.AppendLine(ErrorMessage);
+                    continue;
+                }
+
+                DateTime birthDate = DateTime.ParseExact(dto.BirthDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+
+
+                Citizen citizen = new Citizen()
+                {
+                    FirstName = dto.FirstName,
+                    LastName = dto.LastName,
+                    BirthDate = birthDate,
+                    MaritalStatus = (MaritalStatus)Enum.Parse(typeof(MaritalStatus), dto.MaritalStatus)
+                };
+
+                foreach (int prop in dto.Properties)
+                {
+                    PropertyCitizen propertyCitizen = new PropertyCitizen()
+                    {
+                        Citizen = citizen,
+                        PropertyId = prop,
+                    };
+
+                    citizen.PropertiesCitizens.Add(propertyCitizen);
+                }
+
+                validCitizens.Add(citizen);
+                sb.AppendLine(String.Format(SuccessfullyImportedCitizen, citizen.FirstName, citizen.LastName, citizen.PropertiesCitizens.Count));
+            }
+
+            dbContext.Citizens.AddRange(validCitizens);
+            dbContext.SaveChanges();
+
+            return sb.ToString().TrimEnd();
         }
 
         private static bool IsValid(object dto)
