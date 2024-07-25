@@ -13,12 +13,14 @@ namespace Cadastre.Data.Models
         [Required]
         public int PropertyId { get; set; }
 
+        [Required]
         [ForeignKey(nameof(PropertyId))]
         public Property Property { get; set; } = null!;
 
         [Required]
         public int CitizenId { get; set; }
 
+        [Required]
         [ForeignKey(nameof(CitizenId))]
         public Citizen Citizen { get; set; } = null!;
     }

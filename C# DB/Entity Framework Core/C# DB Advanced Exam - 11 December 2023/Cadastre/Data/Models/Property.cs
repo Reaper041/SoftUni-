@@ -23,10 +23,10 @@ namespace Cadastre.Data.Models
         public string PropertyIdentifier { get; set; } = null!;
 
         [Required]
-        public uint Area { get; set; }
+        public int Area { get; set; }
 
         [MaxLength(500)]
-        public string? Details { get; set; } = null!;
+        public string? Details { get; set; }
 
         [Required]
         [MaxLength(200)]
