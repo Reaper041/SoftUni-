@@ -2,11 +2,12 @@
 using CinemaApp.Data.Models;
 using CinemaApp.Web.ViewModels.Movie;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 
 namespace CinemaApp.Web.Controllers
 {
-    public class MovieController : Controller
+    public class MovieController : BaseController
     {
         private readonly CinemaContext cinemaContext;
 
@@ -35,7 +36,7 @@ namespace CinemaApp.Web.Controllers
         [HttpPost] 
         public IActionResult Create(AddMovieInputModel inputModel)
         {
-            bool isDateValid = DateTime.TryParseExact(inputModel.ReleaseDate, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime releaseDate);
+            bool isDateValid = DateTime.TryParseExact(inputModel.ReleaseDate, "MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime releaseDate);
 
             if (!isDateValid)
             {
@@ -67,16 +68,17 @@ namespace CinemaApp.Web.Controllers
         [HttpGet]
         public IActionResult Details(string id)
         {
-            bool isValidId = Guid.TryParse(id, out var movieId);
+            Guid movieGuid = Guid.Empty;
+            bool isGuidValid = this.IsGuidValid(id, ref movieGuid);
 
-            if (!isValidId)
+            if (!isGuidValid)
             {
                 return this.RedirectToAction(nameof(Index));
             }
 
             Movie? movie = this.cinemaContext
                 .Movies
-                .FirstOrDefault(x => x.Id == movieId);
+                .FirstOrDefault(x => x.Id == movieGuid);
 
             if (movie == null)
             {
@@ -84,6 +86,46 @@ namespace CinemaApp.Web.Controllers
             }
 
             return View(movie);
+        }
+
+        [HttpGet]
+        public IActionResult AddToProgram(string? id)
+        {
+            Guid movieGuid = Guid.Empty;
+            bool isGuidValid = IsGuidValid(id, ref movieGuid);
+
+            if (!isGuidValid)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            Movie? movie = cinemaContext
+                .Movies
+                .FirstOrDefault (x => x.Id == movieGuid);
+
+            if(movie == null)
+            {
+                return RedirectToAction(nameof (Index));
+            }
+
+            AddMovieToCinemaInputModel model = new AddMovieToCinemaInputModel()
+            {
+                Id = id!,
+                Title = movie.Title,
+                Cinemas = cinemaContext
+                .Cinemas
+                .Include(c => c.CinemaMovies)
+                .ThenInclude(cm => cm.Movie)
+                .Select(c => new ViewModels.Cinema.CinemaCheckBoxInputModel()
+                {
+                    Id = c.Id.ToString(),
+                    Name = c.Name,
+                    IsSelected = c.CinemaMovies.Any(cm => cm.Movie.Id == movieGuid)
+                })
+                .ToArray()
+            };
+
+            return View(model);
         }
     }
 }

@@ -5,6 +5,11 @@ namespace CinemaApp.Web.ViewModels.Movie
 {
     public class AddMovieInputModel
     {
+        public AddMovieInputModel()
+        {
+            this.ReleaseDate = DateTime.UtcNow.ToString("MM/yyyy");
+        }
+
         [Required]
         [MinLength(TitleMinLength)]
         [MaxLength(TitleMaxLength)]

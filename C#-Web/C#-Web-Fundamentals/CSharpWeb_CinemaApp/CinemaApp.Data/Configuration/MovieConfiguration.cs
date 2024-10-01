@@ -31,6 +31,7 @@ namespace CinemaApp.Data.Configuration
                 .IsRequired()
                 .HasMaxLength(DescriptionMaxLength);
 
+
             builder.HasData(SeedMovies());
         }
 

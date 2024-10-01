@@ -4,6 +4,7 @@ using CinemaApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaApp.Data.Migrations
 {
     [DbContext(typeof(CinemaContext))]
-    partial class CinemaContextModelSnapshot : ModelSnapshot
+    [Migration("20240930120501_AddedNewEntities")]
+    partial class AddedNewEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,18 +43,18 @@ namespace CinemaApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cinemas", (string)null);
+                    b.ToTable("Cinemas");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2c697673-eccc-4f76-b628-e56411c3b13a"),
+                            Id = new Guid("9164c53c-fa77-4808-be37-53d4d57a6f92"),
                             Location = "Svishtov",
                             Name = "Latona"
                         },
                         new
                         {
-                            Id = new Guid("8b540493-d805-4eac-b5f9-47e3348dcbe5"),
+                            Id = new Guid("cb733582-3ad8-4bae-9c0a-08c3bce13cee"),
                             Location = "Ring Mall Sofia",
                             Name = "CineGrand"
                         });
@@ -69,7 +72,7 @@ namespace CinemaApp.Data.Migrations
 
                     b.HasIndex("CinemaId");
 
-                    b.ToTable("CinemasMovies", (string)null);
+                    b.ToTable("CinemasMovies");
                 });
 
             modelBuilder.Entity("CinemaApp.Data.Models.Movie", b =>
@@ -106,12 +109,12 @@ namespace CinemaApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movies", (string)null);
+                    b.ToTable("Movies");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("03ad5d10-4386-4258-b8ab-0906e763580a"),
+                            Id = new Guid("3f366a8e-6ef0-4360-af70-36fc97c9018c"),
                             Description = "Some description",
                             Director = "Mike Newel",
                             Duration = 157,
@@ -121,7 +124,7 @@ namespace CinemaApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8018ab04-5af1-44a0-ba60-66ff6f23dab3"),
+                            Id = new Guid("b3620c1b-f63b-48bf-83f4-6af9e47a2af4"),
                             Description = "Some description",
                             Director = "Peter Jackson",
                             Duration = 278,
@@ -136,13 +139,13 @@ namespace CinemaApp.Data.Migrations
                     b.HasOne("CinemaApp.Data.Models.Cinema", "Cinema")
                         .WithMany("CinemaMovies")
                         .HasForeignKey("CinemaId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CinemaApp.Data.Models.Movie", "Movie")
                         .WithMany("CinemaMovies")
                         .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cinema");
