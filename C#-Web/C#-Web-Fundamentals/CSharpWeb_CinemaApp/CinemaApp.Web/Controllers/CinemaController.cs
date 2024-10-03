@@ -78,6 +78,7 @@ namespace CinemaApp.Web.Controllers
                 Location = cinema.Location,
                 Movies = cinema
                 .CinemaMovies
+                .Where(cm => cm.IsDeleted == false)
                 .Select(cm => new ViewModels.Movie.CinemaMovieViewModel()
                 {
                     Title = cm.Movie.Title,

@@ -4,6 +4,7 @@ using CinemaApp.Web.ViewModels.Movie;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 
 namespace CinemaApp.Web.Controllers
 {
@@ -127,5 +128,88 @@ namespace CinemaApp.Web.Controllers
 
             return View(model);
         }
+
+        [HttpPost]
+        public IActionResult AddToProgram(AddMovieToCinemaInputModel model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            Guid movieGuid = Guid.Empty;
+            bool isMovieGuidValid = this.IsGuidValid(model.Id, ref movieGuid);
+
+            if (!isMovieGuidValid)
+            {
+                return this.RedirectToAction(nameof(Index));
+            }
+
+            Movie? movie = cinemaContext
+                .Movies
+                .FirstOrDefault(c => c.Id == movieGuid);
+
+            if (movie == null)
+            {
+                return this.RedirectToAction(nameof(Index));
+            }
+
+            ICollection<CinemaMovie> entitiesToAdd = new List<CinemaMovie>();
+
+            foreach (var cinemaInputModel in model.Cinemas)
+            {
+                Guid cinemaGuid = Guid.Empty;
+                bool isCinemaGuidValid = this.IsGuidValid(cinemaInputModel.Id, ref cinemaGuid);
+
+                if (!isCinemaGuidValid)
+                {
+                    this.ModelState.AddModelError(String.Empty, "Invalid Cinema selected!");
+                    return View(model);
+                }
+
+                Cinema? cinema = cinemaContext
+                    .Cinemas
+                    .FirstOrDefault(c => c.Id == cinemaGuid);
+
+                if (cinema == null)
+                {
+                    this.ModelState.AddModelError(String.Empty, "Invalid Cinema selected!");
+                    return View(model);
+                }
+                CinemaMovie? cinemaMovie = cinemaContext.CinemasMovies
+                        .FirstOrDefault(cm => cm.MovieId == movieGuid && cm.CinemaId == cinemaGuid);
+
+                if (cinemaInputModel.IsSelected)
+                {
+                    if (cinemaMovie == null)
+                    {
+                        entitiesToAdd.Add(new CinemaMovie
+                        {
+                            Cinema = cinema,
+                            Movie = movie,
+                        });
+                    }
+                    else
+                    {
+                        cinemaMovie.IsDeleted = false;
+                    }
+                }
+                else
+                {
+                    if (cinemaMovie != null)
+                    {
+                        cinemaMovie.IsDeleted = true;
+                    }
+                }
+
+                cinemaContext.SaveChanges();
+            }
+
+            cinemaContext.AddRange(entitiesToAdd);
+            cinemaContext.SaveChanges();
+
+            return RedirectToAction(nameof(Index), "Cinema");
+        }    
     }
 }

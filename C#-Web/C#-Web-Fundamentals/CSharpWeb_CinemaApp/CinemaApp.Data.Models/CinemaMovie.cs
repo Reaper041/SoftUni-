@@ -9,5 +9,7 @@
         public Guid CinemaId { get; set; }
 
         public virtual Cinema Cinema { get; set; } = null!;
+
+        public bool IsDeleted { get; set; }
     }
 }

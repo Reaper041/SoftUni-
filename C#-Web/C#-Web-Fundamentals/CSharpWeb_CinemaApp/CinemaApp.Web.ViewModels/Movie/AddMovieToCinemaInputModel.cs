@@ -15,7 +15,7 @@ namespace CinemaApp.Web.ViewModels.Movie
         [MaxLength(TitleMaxLength)]
         public string Title { get; set; } = null!;
 
-        public IEnumerable<CinemaCheckBoxInputModel> Cinemas { get; set; } = 
-            new HashSet<CinemaCheckBoxInputModel>();
+        public IList<CinemaCheckBoxInputModel> Cinemas { get; set; } = 
+            new List<CinemaCheckBoxInputModel>();
     }
 }

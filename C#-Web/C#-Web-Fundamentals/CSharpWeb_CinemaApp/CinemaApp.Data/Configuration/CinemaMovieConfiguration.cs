@@ -12,6 +12,10 @@ namespace CinemaApp.Data.Configuration
             builder.HasKey(cm => new { cm.MovieId, cm.CinemaId });
 
             builder
+                .Property(cm => cm.IsDeleted)
+                .HasDefaultValue(false);
+
+            builder
                 .HasOne(cm => cm.Movie)
                 .WithMany(m => m.CinemaMovies)
                 .HasForeignKey(cm => cm.MovieId)
