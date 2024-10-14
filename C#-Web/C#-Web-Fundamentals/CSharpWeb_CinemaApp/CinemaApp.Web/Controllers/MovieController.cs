@@ -58,6 +58,7 @@ namespace CinemaApp.Web.Controllers
                 Duration = inputModel.Duration,
                 ReleaseDate = releaseDate,
                 Genre = inputModel.Genre,
+                ImageUrl = inputModel.ImageUrl,
             };
 
             this.cinemaContext.Movies.Add(movie);

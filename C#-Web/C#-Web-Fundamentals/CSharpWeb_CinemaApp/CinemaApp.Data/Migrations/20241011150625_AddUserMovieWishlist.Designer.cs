@@ -4,6 +4,7 @@ using CinemaApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaApp.Data.Migrations
 {
     [DbContext(typeof(CinemaContext))]
-    partial class CinemaContextModelSnapshot : ModelSnapshot
+    [Migration("20241011150625_AddUserMovieWishlist")]
+    partial class AddUserMovieWishlist
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,7 +103,7 @@ namespace CinemaApp.Data.Migrations
 
                     b.HasIndex("MovieGuid");
 
-                    b.ToTable("UsersMovies");
+                    b.ToTable("ApplicationUserMovie");
                 });
 
             modelBuilder.Entity("CinemaApp.Data.Models.Cinema", b =>
@@ -126,13 +129,13 @@ namespace CinemaApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("468ea2f6-8263-4257-b5f3-f1029293b66d"),
+                            Id = new Guid("230739e2-0206-439f-9934-1f4f6548c2e7"),
                             Location = "Svishtov",
                             Name = "Latona"
                         },
                         new
                         {
-                            Id = new Guid("5efed735-28e6-42aa-89f9-7ab190d0aaa0"),
+                            Id = new Guid("6b6d51a6-025c-4a96-9da0-5af59bd8df3f"),
                             Location = "Ring Mall Sofia",
                             Name = "CineGrand"
                         });
@@ -182,11 +185,6 @@ namespace CinemaApp.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("ImageUrl")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("~/img/no-img.jpg");
-
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
@@ -202,7 +200,7 @@ namespace CinemaApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("03db33bf-2b40-4626-a8e7-83edb0963c40"),
+                            Id = new Guid("d6e5e824-369d-4b41-885b-668d9ec9b57a"),
                             Description = "Some description",
                             Director = "Mike Newel",
                             Duration = 157,
@@ -212,7 +210,7 @@ namespace CinemaApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c00abead-0f99-4862-9951-7916943a15cd"),
+                            Id = new Guid("066998fd-4194-4f94-b2e3-74b5039314de"),
                             Description = "Some description",
                             Director = "Peter Jackson",
                             Duration = 278,

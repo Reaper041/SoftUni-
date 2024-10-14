@@ -6,14 +6,14 @@ namespace CinemaApp.Web.Controllers
     {
 
 
-        protected bool IsGuidValid(string? id, ref Guid cinemaGuid)
+        protected bool IsGuidValid(string? id, ref Guid parsedGuid)
         {
             if (String.IsNullOrWhiteSpace(id))
             {
                 return false;
             }
 
-            bool isGuidValid = Guid.TryParse(id, out cinemaGuid);
+            bool isGuidValid = Guid.TryParse(id, out parsedGuid);
 
             if (!isGuidValid)
             {

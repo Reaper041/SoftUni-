@@ -1,10 +1,12 @@
 ﻿using CinemaApp.Data.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace CinemaApp.Data
 {
-    public class CinemaContext : DbContext
+    public class CinemaContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
         public CinemaContext()
         {
@@ -23,10 +25,11 @@ namespace CinemaApp.Data
 
         public virtual DbSet<CinemaMovie> CinemasMovies { get; set; } = null!;
 
-
+        public virtual DbSet<ApplicationUserMovie> UsersMovies { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }

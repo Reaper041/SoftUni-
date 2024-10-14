@@ -4,6 +4,7 @@ using CinemaApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaApp.Data.Migrations
 {
     [DbContext(typeof(CinemaContext))]
-    partial class CinemaContextModelSnapshot : ModelSnapshot
+    [Migration("20241011152358_AddedMovieImageUrl")]
+    partial class AddedMovieImageUrl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,7 +103,7 @@ namespace CinemaApp.Data.Migrations
 
                     b.HasIndex("MovieGuid");
 
-                    b.ToTable("UsersMovies");
+                    b.ToTable("ApplicationUserMovie");
                 });
 
             modelBuilder.Entity("CinemaApp.Data.Models.Cinema", b =>
@@ -126,13 +129,13 @@ namespace CinemaApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("468ea2f6-8263-4257-b5f3-f1029293b66d"),
+                            Id = new Guid("9aaa12a2-1192-43e9-9e2c-34a354e536a9"),
                             Location = "Svishtov",
                             Name = "Latona"
                         },
                         new
                         {
-                            Id = new Guid("5efed735-28e6-42aa-89f9-7ab190d0aaa0"),
+                            Id = new Guid("5ca867ef-4e4e-4135-b81c-071fa70231e6"),
                             Location = "Ring Mall Sofia",
                             Name = "CineGrand"
                         });
@@ -202,7 +205,7 @@ namespace CinemaApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("03db33bf-2b40-4626-a8e7-83edb0963c40"),
+                            Id = new Guid("bd077ecb-8ea3-404f-a241-09bf7a293097"),
                             Description = "Some description",
                             Director = "Mike Newel",
                             Duration = 157,
@@ -212,7 +215,7 @@ namespace CinemaApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c00abead-0f99-4862-9951-7916943a15cd"),
+                            Id = new Guid("8ebc5b93-ab5e-4364-b9d1-c89f3b8105e7"),
                             Description = "Some description",
                             Director = "Peter Jackson",
                             Duration = 278,
