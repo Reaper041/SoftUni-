@@ -10,19 +10,13 @@ using System.Security.Claims;
 namespace GameZone.Controllers
 {
     [Authorize]
-    public class GameController : Controller
+    public class GameController(GameZoneDbContext context) : Controller
     {
-        private readonly GameZoneDbContext context;
-
-        public GameController(GameZoneDbContext _context)
-        {
-            context = _context;
-        }
 
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var models = await this.context
+            var models = await context
                 .Games
                 .Select(e => new GameInfoViewModel()
                 {
@@ -42,8 +36,10 @@ namespace GameZone.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            var model = new AddGameViewModel();
-            model.Genres = await context.Genres.ToListAsync();
+            var model = new AddGameViewModel
+            {
+                Genres = await context.Genres.ToListAsync()
+            };
 
             return View(model);
         }
@@ -58,9 +54,8 @@ namespace GameZone.Controllers
                 return View(model);
             }
 
-            DateTime releasedOn;
 
-            bool parseDate = DateTime.TryParseExact(model.ReleasedOn, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out releasedOn);
+            bool parseDate = DateTime.TryParseExact(model.ReleasedOn, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime releasedOn);
 
             if (!parseDate)
             {
@@ -91,7 +86,7 @@ namespace GameZone.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            AddGameViewModel? model = await this.context
+            AddGameViewModel? model = await context
                 .Games
                 .Where(x => x.Id == id)
                 .AsNoTracking()
@@ -120,9 +115,8 @@ namespace GameZone.Controllers
                 return View(model);
             }
 
-            DateTime releasedOn;
 
-            bool parseDate = DateTime.TryParseExact(model.ReleasedOn, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out releasedOn);
+            bool parseDate = DateTime.TryParseExact(model.ReleasedOn, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime releasedOn);
 
             if (!parseDate)
             {
@@ -133,7 +127,7 @@ namespace GameZone.Controllers
                 return View(model);
             }
 
-            Game? entity = await this.context.Games.FindAsync(id);
+            Game? entity = await context.Games.FindAsync(id);
 
             if (entity == null)
             {
@@ -157,7 +151,7 @@ namespace GameZone.Controllers
         {
             var currUserId = GetCurrentUserId() ?? string.Empty;
 
-            var models = await this.context
+            var models = await context
                 .Games
                 .Where(g => g.GamersGames.Any(gr => gr.GamerId == currUserId))
                 .Select(g => new GameInfoViewModel()
@@ -180,13 +174,13 @@ namespace GameZone.Controllers
         {
             var currUserId = GetCurrentUserId() ?? string.Empty;
 
-            Game? model = await this.context
+            Game? model = await context
                 .Games
                 .Where(g => g.Id == id)
                 .Include(g => g.GamersGames)
                 .FirstOrDefaultAsync();
 
-            if (!model!.GamersGames.Any(gr => gr.GamerId == currUserId))
+            if (model!.GamersGames.All(gr => gr.GamerId != currUserId))
             {
                 GamerGame gamerGame = new GamerGame()
                 {
@@ -194,8 +188,8 @@ namespace GameZone.Controllers
                     GamerId = currUserId,
                 };
 
-                await this.context.GamersGames.AddAsync(gamerGame);
-                await this.context.SaveChangesAsync();
+                await context.GamersGames.AddAsync(gamerGame);
+                await context.SaveChangesAsync();
             }
             else
             {
@@ -210,7 +204,7 @@ namespace GameZone.Controllers
         {
             var currUserId = GetCurrentUserId() ?? string.Empty;
 
-            GamerGame? entity = await this.context
+            GamerGame? entity = await context
                 .GamersGames
                 .Where(gr => gr.GameId == id && gr.GamerId == currUserId)
                 .FirstOrDefaultAsync();
@@ -220,8 +214,8 @@ namespace GameZone.Controllers
                 throw new ArgumentException("Invalid id");
             }
 
-            this.context.GamersGames.Remove(entity);
-            await this.context.SaveChangesAsync();
+            context.GamersGames.Remove(entity);
+            await context.SaveChangesAsync();
 
 
             return RedirectToAction(nameof(MyZone));
@@ -230,7 +224,7 @@ namespace GameZone.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            GameInfoViewModel? model = await this.context
+            GameInfoViewModel? model = await context
                 .Games
                 .Where(g => g.Id == id)
                 .Select(g => new GameInfoViewModel()
@@ -256,7 +250,7 @@ namespace GameZone.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            DeleteGameViewModel? model = await this.context
+            DeleteGameViewModel? model = await context
                 .Games
                 .Where (g => g.Id == id)
                 .Select(g => new DeleteGameViewModel()
@@ -278,7 +272,7 @@ namespace GameZone.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteConfirmed(DeleteGameViewModel model)
         {
-            Game? entity = await this.context
+            Game? entity = await context
                 .Games
                 .Where(g => g.Id == model.Id)
                 .FirstOrDefaultAsync();
@@ -288,8 +282,8 @@ namespace GameZone.Controllers
                 throw new ArgumentException("Invalid Id");
             }
 
-            this.context.Games.Remove(entity);
-            await this.context.SaveChangesAsync();
+            context.Games.Remove(entity);
+            await context.SaveChangesAsync();
 
             return RedirectToAction(nameof(All)); 
         }
